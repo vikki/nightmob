@@ -1,4 +1,5 @@
 var Proxy = require('browsermob-proxy').Proxy,
+	webdriverjs = require("webdriverjs"),
     fs = require('fs');
 
 // assumes proxy is running on localhost:4444
@@ -12,6 +13,7 @@ var testUrl = "http://test.video.unrulymedia.com/leo-marmalade/leo.html?d=139687
 var harName = "leo.html.har";
 
 function checkForImp(data) {
+	//console.log('har data ' + data);
 	var har = JSON.parse(data);
 	
 	function findMatchingEntries(har, stringToMatch) {
@@ -32,11 +34,48 @@ function checkForImp(data) {
 }
 
 
-proxy.doHAR(testUrl, function(err, data) {
+proxy.start(function(err, data) {
     if (err) {
-        console.error('ERROR: ' + err);
-    } else {
-    	checkForImp(data);
+    	console.error('ERROR starting proxy : ' + err);
+        return;
     }
+
+    //console.log(data.port);
+    
+    proxy.startHAR(data.port, testUrl, function(err, resp) {
+		if (err) {
+	    	console.error('ERROR setting up har: ' + err);
+	    	proxy.stop(data.port, function() {});
+	        return;
+	    }
+
+	    doSeleniumStuff('localhost' + ':' +  data.port, function () {
+	    	proxy.getHAR(data.port, function(err, resp) {
+		    	if (err) {
+			    	console.error('ERROR getting har: ' + err);
+			    	proxy.stop(data.port, function() {});
+			        return;
+			    }
+		    	checkForImp(resp);
+		    	proxy.stop(data.port, function() {});
+		    });
+	    });
+
+	    
+    });
 });
+
+function doSeleniumStuff(proxy, cb) {
+    var browser = webdriverjs.remote({
+        host: 'localhost'
+        , port: 4444
+        , desiredCapabilities: { browserName: 'firefox', seleniumProtocol: 'WebDriver', proxy: { httpProxy: proxy } }
+    });
+
+    browser
+        .init()
+        .url(testUrl)
+        //.saveScreenshot('results.png')
+        .end(cb);
+}
 
