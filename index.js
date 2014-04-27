@@ -30,40 +30,53 @@ function checkForImp(data) {
 	} else {
 		console.log('goddammit! :(');
 	}
-    //fs.writeFileSync(harName, data, 'utf8');
+    fs.writeFileSync(harName, data, 'utf8');
 }
 
+var currentPort;
 
-proxy.start(function(err, data) {
-    if (err) {
-    	console.error('ERROR starting proxy : ' + err);
-        return;
-    }
-
-    //console.log(data.port);
-    
-    proxy.startHAR(data.port, testUrl, function(err, resp) {
-		if (err) {
-	    	console.error('ERROR setting up har: ' + err);
-	    	proxy.stop(data.port, function() {});
+function startListening(cb) {
+	proxy.start(function(err, data) {
+	    if (err) {
+	    	console.error('ERROR starting proxy : ' + err);
 	        return;
 	    }
 
-	    doSeleniumStuff('localhost' + ':' +  data.port, function () {
-	    	proxy.getHAR(data.port, function(err, resp) {
-		    	if (err) {
-			    	console.error('ERROR getting har: ' + err);
-			    	proxy.stop(data.port, function() {});
-			        return;
-			    }
-		    	checkForImp(resp);
-		    	proxy.stop(data.port, function() {});
-		    });
-	    });
-
+	    currentPort = data.port;
 	    
+	    proxy.startHAR(currentPort, testUrl, function(err, resp) {
+			if (err) {
+		    	console.error('ERROR setting up har: ' + err);
+		    	stopListening();
+		        return;
+		    }
+
+		    cb();
+		    
+	    });
+	});
+}
+
+function stopListening() {
+	proxy.stop(currentPort, function() {});
+}
+
+function doStuff(cb) {
+    doSeleniumStuff('localhost' + ':' +  currentPort, cb);
+}
+
+function assertStuff(cb) {
+	//console.log('assert stuff');
+    proxy.getHAR(currentPort, function(err, resp) {
+    	if (err) {
+	    	console.error('ERROR getting har: ' + err);
+	    	stopListening();
+	        return;
+	    }
+    	checkForImp(resp);
+    	cb();
     });
-});
+}
 
 function doSeleniumStuff(proxy, cb) {
     var browser = webdriverjs.remote({
@@ -72,10 +85,22 @@ function doSeleniumStuff(proxy, cb) {
         , desiredCapabilities: { browserName: 'firefox', seleniumProtocol: 'WebDriver', proxy: { httpProxy: proxy } }
     });
 
+    //console.log('do sel');
+
     browser
         .init()
         .url(testUrl)
         //.saveScreenshot('results.png')
         .end(cb);
+
+      // console.log('do sel stuff soon');
 }
+
+// cough promises cough
+startListening(function () {
+	doStuff(function() {
+		//console.log('cb');
+		assertStuff(stopListening);
+	});
+});
 
