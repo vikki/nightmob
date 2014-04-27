@@ -11,26 +11,32 @@ var testUrl = "http://test.video.unrulymedia.com/leo-marmalade/leo.html?d=139687
 //var testUrl = "http://www.doyouyoga.com";
 var harName = "leo.html.har";
 
+function checkForImp(data) {
+	var har = JSON.parse(data);
+	
+	function findMatchingEntries(har, stringToMatch) {
+		var harEntries = har.log.entries;
+		return harEntries.filter(function(entry) {
+			return entry.request.url.indexOf(stringToMatch) !== -1;
+		});
+	}
+
+	var imps = findMatchingEntries(har, "t=imp");
+	var hazImpreshun = imps.length > 0;
+	if (hazImpreshun) {
+		console.log('i can haz impreshun! ' + imps[0].request.url);
+	} else {
+		console.log('goddammit! :(');
+	}
+    //fs.writeFileSync(harName, data, 'utf8');
+}
+
+
 proxy.doHAR(testUrl, function(err, data) {
     if (err) {
         console.error('ERROR: ' + err);
     } else {
-		var har = JSON.parse(data);
-		
-		function findMatchingEntries(har, stringToMatch) {
-			var harEntries = har.log.entries;
-			return harEntries.filter(function(entry) {
-				return entry.request.url.indexOf(stringToMatch) !== -1;
-			});
-		}
-
-    	var hazImpreshun = findMatchingEntries(har, "t=imp").length > 0;
-    	if (hazImpreshun) {
-    		console.log('i can haz impreshun!');
-    	} else {
-    		console.log('goddammit! :(');
-    	}
-        //fs.writeFileSync(harName, data, 'utf8');
+    	checkForImp(data);
     }
 });
 
