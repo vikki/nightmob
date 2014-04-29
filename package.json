@@ -1,15 +1,19 @@
 {
-  "name": "browsermob_shenanigans",
+  "name": "nightmob",
   "version": "0.0.0",
-  "description": "",
+  "description": "An experiment in integrating the browsermob proxy into my nightwatch setup",
   "main": "index.js",
+  "repository": "git://github.com/vikki/nightmob.git",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/nightwatch/bin/nightwatch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Vikki <vikki.read@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "browsermob-proxy": "~1.0.5",
     "webdriverjs": "~1.6.1"
+  },
+  "devDependencies": {
+    "nightwatch": "git://github.com/vikki/nightwatch.git"
   }
 }
