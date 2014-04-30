@@ -1,13 +1,13 @@
 var recordHAR = require('../commands/lib/recordHAR');
 
 module.exports = {
-  setUp: function(self, cb, nightwatchClient) {
+  setUp: function(self, cb) {
     self.proxy = recordHAR.createProxy();
     recordHAR.startProxy(self.proxy, function(proxyPort) {
         var proxyUrl = 'localhost' + ':' +  proxyPort;
         console.log('browsermob proxy listening on ' + proxyUrl);
 
-        nightwatchClient.desiredCapabilities.proxy = { httpProxy: proxyUrl };
+        self.desiredCapabilities.proxy = { httpProxy: proxyUrl };
 
         self.proxyPort = proxyPort;
 
