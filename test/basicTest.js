@@ -24,9 +24,10 @@ module.exports = {
       .waitForElementVisible('button[name=btnG]', 1000)
       .click('button[name=btnG]')
       .pause(1000)
-      .getHAR("ergh")
+        .assert.containsText('#main', 'The Night Watch')
+      .assert.isRequestUrlMatching('clients1.google.com/ocsp')
+        .assert.containsText('#main', 'IMDb')
       .stopHAR("ergh")
-      .assert.containsText('#main', 'The Night Watch')
       .end();
   }
 };

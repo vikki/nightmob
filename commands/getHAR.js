@@ -8,7 +8,7 @@ exports.command = function(file, callback) {
 
   recordHAR.getHAR(this.proxy, this.proxyPort, function (harData) {
        if (typeof callback === "function") {
-        callback.call(self, result);
+        callback.call(self, harData);
       }
 
       console.log(harData);
