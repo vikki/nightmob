@@ -1,4 +1,4 @@
-var recordHAR = require('./commands/lib/recordHAR'),
+var recordHAR = require('./lib/recordHAR'),
 	webdriverjs = require("webdriverjs"),
     fs = require('fs');
 

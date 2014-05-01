@@ -1,16 +1,16 @@
-var recordHAR = require('./lib/recordHAR');
+var recordHAR = require('../lib/recordHAR');
 
-exports.command = function(file, callback) {
+exports.command = function(callback) {
   var self = this;
   if (!this.proxy) {
-    console.log('no proxy to kill capn');
+    console.error('No proxy setup - did you call setupProxy() ?');
   }
 
-  recordHAR.stopListening(this.proxy, this.proxyPort, function () {
-       if (typeof callback === "function") {
-        callback.call(self, result);
-      }
+  recordHAR.stopListening(this.proxy, this.proxyPort, function (err) {
+     if (typeof callback === "function") {
+      callback.call(self, result);
+    }
   });
 
-  return this; // allows the command to be chained.
+  return this;
 };
