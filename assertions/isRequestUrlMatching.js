@@ -1,5 +1,3 @@
-var recordHAR = require('../lib/recordHAR');
-
 function findMatchingEntries(har, stringToMatch) {
   var harEntries = har.log.entries;
   return harEntries.filter(function(entry) {
@@ -23,7 +21,7 @@ exports.assertion = function(requestUrlMatcher) {
 
   this.command = function(callback) {
     var self = this;
-    recordHAR.getHAR(this.api.proxy, this.api.proxyPort, function(err, har) {
+      this.api.proxy.getHAR(this.api.proxyPort, function(err, har) {
       callback(har);
       self.emit('complete');
     });

@@ -15,4 +15,4 @@ Then you'll need to start both. index.js is expecting selenium to be running on 
 
 	$ sh browsermob-proxy
 
-then node index.js should request an ad and check if it requests an impression. Whoo :D
+You should then be able to run nightwatch against test/basicTest.js and it will verify that a request was made - this happens due to the assertions, commands and setup that have been created - which are registered in settings.json. Proper README to follow :)

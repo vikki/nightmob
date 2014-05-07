@@ -1,5 +1,3 @@
-var recordHAR = require('../lib/recordHAR');
-
 exports.command = function(harName, callback) {
   var self = this;
 
@@ -7,8 +5,8 @@ exports.command = function(harName, callback) {
     console.error('No proxy setup - did you call setupProxy() ?');
   }
 
-  recordHAR.startHAR(this.proxy, this.proxyPort, harName, function (err) {
-	if (typeof callback === "function") {
+  this.proxy.startHAR(this.proxyPort, harName, function (err) {
+    if (typeof callback === "function") {
       callback.call(self, result);
     }
   });
