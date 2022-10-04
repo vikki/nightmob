@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hawk:20160119':
+    - webdriverjs > request > hawk:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:http-signature:20150122':
+    - webdriverjs > request > http-signature:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:mime:20170907':
+    - webdriverjs > request > form-data > mime:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:minimatch:20160620':
+    - webdriverjs > archiver > file-utils > glob > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+    - webdriverjs > archiver > file-utils > findup-sync > glob > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+    - webdriverjs > crx > archiver > file-utils > glob > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+    - webdriverjs > crx > archiver > file-utils > findup-sync > glob > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+    - webdriverjs > archiver > file-utils > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+    - webdriverjs > crx > archiver > file-utils > minimatch:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:qs:20140806-1':
+    - webdriverjs > request > qs:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:request:20160119':
+    - webdriverjs > request:
+        patched: '2022-10-04T11:47:14.605Z'
+  'npm:ws:20160920':
+    - webdriverjs > socket.io > socket.io-client > ws:
+        patched: '2022-10-04T11:47:14.605Z'
