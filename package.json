@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "browsermob-proxy": "~1.0.5",
-    "webdriverjs": "~1.6.1"
+    "webdriverjs": "~1.7.4"
   },
   "devDependencies": {
     "nightwatch": "git://github.com/vikki/nightwatch.git"
