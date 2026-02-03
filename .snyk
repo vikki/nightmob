@@ -1,0 +1,66 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hawk:20160119':
+    - webdriverjs > request > hawk:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:hawk:20160119'
+        path: webdriverjs > request > hawk
+  'npm:http-signature:20150122':
+    - webdriverjs > request > http-signature:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:http-signature:20150122'
+        path: webdriverjs > request > http-signature
+  'npm:mime:20170907':
+    - webdriverjs > request > mime:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:mime:20170907'
+        path: webdriverjs > request > mime
+    - webdriverjs > request > form-data > mime:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:mime:20170907'
+        path: webdriverjs > request > form-data > mime
+  'npm:minimatch:20160620':
+    - webdriverjs > archiver > file-utils > glob > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: webdriverjs > archiver > file-utils > glob > minimatch
+    - webdriverjs > archiver > file-utils > findup-sync > glob > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: webdriverjs > archiver > file-utils > findup-sync > glob > minimatch
+    - webdriverjs > crx > archiver > file-utils > glob > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: webdriverjs > crx > archiver > file-utils > glob > minimatch
+    - webdriverjs > crx > archiver > file-utils > findup-sync > glob > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: >-
+          webdriverjs > crx > archiver > file-utils > findup-sync > glob >
+          minimatch
+    - webdriverjs > archiver > file-utils > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: webdriverjs > archiver > file-utils > minimatch
+    - webdriverjs > crx > archiver > file-utils > minimatch:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:minimatch:20160620'
+        path: webdriverjs > crx > archiver > file-utils > minimatch
+  'npm:qs:20140806-1':
+    - webdriverjs > request > qs:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:qs:20140806-1'
+        path: webdriverjs > request > qs
+  'npm:request:20160119':
+    - webdriverjs > request:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:request:20160119'
+        path: webdriverjs > request
+  'npm:ws:20160920':
+    - webdriverjs > socket.io > socket.io-client > ws:
+        patched: '2026-02-03T18:01:44.610Z'
+        id: 'npm:ws:20160920'
+        path: webdriverjs > socket.io > socket.io-client > ws
