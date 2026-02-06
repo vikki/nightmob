@@ -5,15 +5,19 @@
   "main": "index.js",
   "repository": "git://github.com/vikki/nightmob.git",
   "scripts": {
-    "test": "node_modules/nightwatch/bin/nightwatch"
+    "test": "node_modules/nightwatch/bin/nightwatch",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "author": "Vikki <vikki.read@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "browsermob-proxy": "~1.0.5",
-    "webdriverjs": "~1.6.1"
+    "webdriverjs": "~1.6.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "nightwatch": "git://github.com/vikki/nightwatch.git"
-  }
+  },
+  "snyk": true
 }
